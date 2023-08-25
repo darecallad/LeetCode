@@ -34,7 +34,7 @@ function reverseLinkedList(head) {
 function plusOne(digits) {
   let n = digits.length;
 
-  for (let i = n - 1; n >= 0; n--) {
+  for (let i = n - 1; i >= 0; i--) {
     if (digits[i] < 9) {
       digits[i]++;
       return digits;
@@ -44,4 +44,16 @@ function plusOne(digits) {
   // jump out for loop = we get something like [9,9];
   digits.unshift(1);
   return digits;
+}
+
+// 392. Is Subsequence
+
+function subsequence(s, t) {
+  // use pointer
+  let sIndex = 0;
+
+  for (let c of t) {
+    if (s[sIndex] === c) sIndex++;
+  }
+  return sIndex === s.length;
 }
