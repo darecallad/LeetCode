@@ -73,3 +73,10 @@ function search(nums, target) {
 
   return -1;
 }
+
+// 58. Length of Last Word
+
+function lengthOfLastWord(s) {
+  s = s.trim();
+  return s.length - s.lastIndexOf(" ") - 1; // -1 because its index number starting at 0 position.
+}
