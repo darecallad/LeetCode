@@ -28,3 +28,20 @@ function reverseLinkedList(head) {
 
   return prev;
 }
+
+// 66. Plus One
+
+function plusOne(digits) {
+  let n = digits.length;
+
+  for (let i = n - 1; n >= 0; n--) {
+    if (digits[i] < 9) {
+      digits[i]++;
+      return digits;
+    } else digits[i] = 0;
+  }
+
+  // jump out for loop = we get something like [9,9];
+  digits.unshift(1);
+  return digits;
+}
