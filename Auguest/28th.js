@@ -47,3 +47,26 @@ function isBalanceTree(root) {
     isBalanceTree(root.right)
   );
 }
+
+// 345. Reverse Vowels of a String
+
+function reverseVowels(s) {
+  const vowels = "aeiouAEIOU";
+  let start = 0;
+  let end = s.length - 1;
+  const chars = s.split("");
+
+  while (start < end) {
+    while (start < end && !vowels.includes(chars[start])) start++;
+    while (start < end && !vowels.includes(chars[end])) end--;
+
+    const temp = chars[start];
+    chars[start] = chars[end];
+    chars[end] = temp;
+
+    start++;
+    end--;
+  }
+
+  return chars.join("");
+}
