@@ -17,3 +17,14 @@ function singleNumber(nums) {
   for (let i = 0; i < nums.length; i++) c ^= nums[i]; //XOR
   return c;
 }
+
+// 100. Same Tree
+
+function sameTree(p, q) {
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+
+  return (
+    p.val === q.val && sameTree(p.left, q.left) && sameTree(p.right, q.right)
+  );
+}
