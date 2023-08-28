@@ -70,3 +70,38 @@ function reverseVowels(s) {
 
   return chars.join("");
 }
+
+// 234. Palindrome Linked List
+
+function palindromeLinked(head) {
+  // check the linked list is null or not
+  if (head === null || head.next === null) return true;
+  // after that first we need to find the middle of the list
+  let slow = head;
+  let fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  // second we need to reverse the second part of the list
+  let prev = null;
+  while (slow !== null) {
+    const temp = slow.next;
+    slow.next = prev;
+    prev = slow;
+    slow = temp;
+  }
+
+  // finally we compare 2 part of linked list val
+  let p1 = head;
+  let p2 = prev;
+
+  while (p2 !== null) {
+    if (p1.val !== p2.val) return false;
+    p1 = p1.next;
+    p2 = p2.next;
+  }
+  return true;
+}
