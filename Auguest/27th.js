@@ -38,3 +38,15 @@ function countEmployee(hours, target) {
   }
   return count;
 }
+
+// 509. Fibonacci Number
+
+function fib(n) {
+  let fib = new Array(n + 1);
+  fib[0] = 0;
+  fib[1] = 1; // base case
+
+  for (let i = 2; i <= n; i++) fib[i] = fib[i - 1] + fib[i - 2];
+
+  return fib[n];
+}
