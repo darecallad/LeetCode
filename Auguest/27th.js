@@ -9,3 +9,11 @@ function missingNumber(nums) {
 
   return total;
 }
+
+// 136. Single Number
+
+function singleNumber(nums) {
+  let c = 0;
+  for (let i = 0; i < nums.length; i++) c ^= nums[i]; //XOR
+  return c;
+}
