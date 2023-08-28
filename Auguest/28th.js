@@ -19,3 +19,11 @@ function isomorphic(s, t) {
 
   return true;
 }
+
+// 2806. Account Balance After Rounded Purchase
+
+function accountBalance(p) {
+  const initNumber = 100;
+  const afterCalNumber = Math.around(p / 10) * 10; // 四捨五入
+  return initNumber - afterCalNumber;
+}
