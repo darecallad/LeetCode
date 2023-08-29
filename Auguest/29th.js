@@ -79,3 +79,19 @@ function maxSum(nums) {
   }
   return maxSum;
 }
+
+// 543. Diameter of Binary Tree
+
+function diameterOfTree(root) {
+  let diameter = 0;
+  const height = (node) => {
+    if (!node) return 0;
+    const left = height(node.left);
+    const right = height(node.right);
+
+    diameter = Math.max(diameter, left + right);
+    return Math.max(left, right) + 1;
+  };
+  height(root);
+  return diameter;
+}
