@@ -9,3 +9,16 @@ function gcdOfStrings(s, t) {
 
   return s.slice(0, length);
 }
+
+// 876. Middle of the Linked List
+
+function middleNode(head) {
+  let slow = head;
+  let fast = head;
+
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow;
+}
