@@ -108,3 +108,23 @@ function ransomNote(a, b) {
   }
   return true;
 }
+
+// 94. Binary Tree Inorder Traversal
+
+function inorderBinaryTree(root) {
+  const result = [];
+  const stack = [];
+  let current = root;
+
+  while (current || stack.length !== 0) {
+    while (current) {
+      stack.push(current);
+      current = current.left;
+    }
+    current = stack.pop();
+    result.push(current.val);
+    current = current.right;
+  }
+
+  return result;
+}
