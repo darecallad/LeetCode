@@ -95,3 +95,16 @@ function diameterOfTree(root) {
   height(root);
   return diameter;
 }
+
+// 383. Ransom Note
+
+function ransomNote(a, b) {
+  const bChar = {};
+
+  for (let char of b) bChar[char] = (bChar[char] || 0) + 1;
+  for (let char of a) {
+    if (!bChar[char]) return false;
+    bChar[char]--;
+  }
+  return true;
+}
