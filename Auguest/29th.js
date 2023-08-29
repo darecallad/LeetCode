@@ -62,3 +62,20 @@ function deleteDuplicates(head) {
   }
   return head;
 }
+
+// 2815. Max Pair Sum in an Array
+
+function maxSum(nums) {
+  const maxDigitsSum = {};
+  let maxSum = -1;
+
+  for (let num of nums) {
+    const maxDigit = Math.max(...num.toString().split("")); // get the max digits from num
+    if (!maxDigitsSum[maxDigit]) maxDigitsSum[maxDigit] = num;
+    else {
+      maxSum = Math.max(maxSum, maxDigitsSum[maxDigit] + num); // if having same max digit, we add it together
+      maxDigitsSum[maxDigit] = Math.max(maxDigitsSum[maxDigit], num);
+    }
+  }
+  return maxSum;
+}
