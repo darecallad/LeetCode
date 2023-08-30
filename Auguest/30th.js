@@ -51,4 +51,20 @@ function search(nums, target) {
 }
 
 // 74. Search a 2D Matrix
-function searchMatrix(matrix, target) {}
+function searchMatrix(matrix, target) {
+  let col = martix[0].length;
+  let row = matrix.length;
+
+  let left = 0;
+  let right = col * row - 1;
+
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const midValue = matrix[Math.floor(mid / col)][mid % col];
+
+    if (midValue === target) return true;
+    else if (midValue < target) left = mid + 1;
+    else right = mid - 1;
+  }
+  return false;
+}
