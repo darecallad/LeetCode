@@ -49,3 +49,6 @@ function search(nums, target) {
   }
   return -1;
 }
+
+// 74. Search a 2D Matrix
+function searchMatrix(matrix, target) {}
