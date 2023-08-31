@@ -23,3 +23,44 @@ function wordBreak(s, wordDict) {
   }
   return dp[s.length];
 }
+
+// 215. Kth Largest Element in an Array
+
+function findKlargest(nums, k) {
+  const heap = [];
+  for (let i = 0; i < nums.length; i++) {
+    if (heap.length < k) {
+      heap.push(nums[i]);
+      heapify(heap);
+    } else if (nums[i] > heap[0]) {
+      heap[0] = nums[i];
+      heapDown(heap);
+    }
+  }
+  return heap[0];
+}
+
+function heapify(heap) {
+  let index = heap.length - 1;
+  while (index > 0) {
+    let parentIndex = Math.floor((index - 1) / 2);
+    if (heap[parentIndex] > heap[index]) {
+      [heap[index], heap[parentIndex]] = [heap[parentIndex], heap[index]];
+      index = parentIndex;
+    } else break;
+  }
+}
+
+function heapDown(heap) {
+  let index = 0;
+  while (2 * index + 1 < heap.length) {
+    let smaller = 2 * index + 1;
+    if (
+      2 * index + 2 < heap.length &&
+      heap[2 * index + 2] < heap[2 * index + 1]
+    ) {
+      [heap[index], heap[smaller]] = [heap[smaller], heap[index]];
+      index = smaller;
+    } else break;
+  }
+}
