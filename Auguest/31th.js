@@ -86,3 +86,27 @@ function search(nums, target) {
   }
   return false;
 }
+
+// 2. Add Two Numbers
+
+function addTwoNumber(l1, l2) {
+  let current = dummyHead(0);
+  let p = l1;
+  let q = l2;
+  let carry = 0;
+
+  while (p || q) {
+    let x = p ? p.val : 0;
+    let y = q ? q.val : 0;
+    let sum = carry + x + y;
+
+    carry = Math.floor(sum / 10);
+    current.next = new ListNode(sum % 10);
+    current = current.next;
+
+    if (p) p = p.next;
+    if (q) q = q.next;
+  }
+  if (carry > 0) current.next = new ListNode(carry);
+  return dummyHead.next;
+}
