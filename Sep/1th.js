@@ -33,3 +33,26 @@ function reverse(nums, start, end) {
     end--;
   }
 }
+
+// 128. Longest Consecutive Sequence
+
+function logestConsecutive(nums) {
+  const numSet = new Set(nums);
+  let longest = 0;
+
+  for (const num of nums) {
+    if (!numSet.has(num - 1)) {
+      let currentNum = num;
+      let currentS = -1;
+
+      while (numSet.has(currentNum + 1)) {
+        currentNum++;
+        currentS++;
+      }
+
+      longest = Math.max(longest, currentS);
+    }
+  }
+
+  return longest;
+}
