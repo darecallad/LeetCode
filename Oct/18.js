@@ -38,3 +38,46 @@ const canPremutePalindrome = (s) => {
 
   return oddCount <= 1;
 };
+
+// 267  Padlindrome Permutation 2
+
+const canPremutePadlindorme2 = (s) => {
+  let map = new Map();
+  let oddCount = 0;
+  let mid = "";
+  let half = "";
+
+  for (let c of s) {
+    map.set(c, (map.get(c) || 0) + 1);
+  }
+
+  for (let [char, count] of map) {
+    if (count % 2 !== 0) {
+      oddCount++;
+      mid = char;
+    }
+    half += char.repeat(Math.floor(count / 2));
+  }
+
+  if (oddCount > 1) return [];
+
+  let result = [];
+  let visited = Array(half.length).fill(false);
+
+  function backtrack(path) {
+    if (path.length === half.length) {
+      result.push(path + mid + path.split("").reverse().join(""));
+      return;
+    }
+
+    for (let i = 0; i < half.length; i++) {
+      if (visited[i] || (i > 0 && half[i] === half[i - 1] && !visited[i - 1]))
+        continue;
+      visited[i] = true;
+      backtrack(path + half[i]);
+      visited[i] = false;
+    }
+  }
+  backtrack("");
+  return result;
+};
