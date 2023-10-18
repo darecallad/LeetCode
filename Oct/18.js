@@ -20,3 +20,21 @@ const predictTheWinner = (nums) => {
 
   return dp[0][n - 1] >= 0;
 };
+
+//266 Padlindrome Permutation
+
+const canPremutePalindrome = (s) => {
+  if (s.length <= 2) return true;
+
+  const map = new Map();
+  for (let c of s) {
+    map.set(c, (map.get(c) || 0) + 1);
+  }
+  let oddCount = 0;
+
+  for (let count of map.values()) {
+    if (count % 2 !== 0) oddCount++;
+  }
+
+  return oddCount <= 1;
+};
