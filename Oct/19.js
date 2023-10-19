@@ -48,3 +48,27 @@ const rob = (nums) => {
 };
 
 // time space O(n) -> time : go tho all the houses | space : cuz dp Array
+
+const rightSideView = (root) => {
+  if (root === null) return [];
+  let result = [];
+  let queue = [root];
+
+  while (queue.length > 0) {
+    let levelSide = queue.length;
+    for (let i = 0; i < levelSide; i++) {
+      let currentNode = queue.shift();
+
+      // if its the last one, we push it into result
+      if (i === queue.length - 1) result.push(currentNode.value);
+
+      if (currentNode.left) queue.push(currentNode.left);
+      if (currentNode.right) queue.push(currentNode.right);
+    }
+  }
+
+  return result;
+};
+
+// time : O(n) each node need to process at least once
+// space : O(n) the max number of items in the queue
