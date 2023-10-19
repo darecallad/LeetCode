@@ -72,3 +72,39 @@ const rightSideView = (root) => {
 
 // time : O(n) each node need to process at least once
 // space : O(n) the max number of items in the queue
+
+// island count
+const numIsLands = (grid) => {
+  // if grid not exist
+  if (!grid || grid.length === 0) return 0;
+  // go tho nested island
+  let row = grid.length;
+  let column = grid[0].length;
+  let count = 0;
+
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < gird[0].length; j++) {
+      if (grid[i][j] === "1") {
+        count++;
+        dfs(grid, i, j);
+      }
+    }
+  }
+  return count;
+};
+
+function dfs(grid, i, j) {
+  if (i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || grid[i][j])
+    return 0;
+
+  // set visited
+  grid[i][j] = "0";
+
+  dfs(grid, i + 1, j);
+  dfs(grid, i - 1, j);
+  dfs(grid, i, j + 1);
+  dfs(grid, i, j - 1);
+}
+
+// time : O (m * n) row * cloumn
+// space: O ( m * n )
