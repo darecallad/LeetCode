@@ -154,3 +154,100 @@ function dfs(node, path) {
 
 // time O(n)
 // space O(n) if banlanced O(logn)
+
+// 108. Convert Sorted Array to Binary Search Tree
+
+const sortedArraytoBST = (nums) => {
+  if (!nums) return null;
+  function convert(left, right) {
+    if (left > right) return null;
+    let mid = Math.floor((left + right) / 2);
+    let root = new TreeNode(nums[mid]);
+
+    root.left = convert(left, mid - 1);
+    root.right = convert(mid + 1, right);
+
+    return root;
+  }
+  return convert(0, nums.length - 1);
+};
+
+// time O(n)
+// space O(logn)
+
+// Reverse String
+const reverseString = (s) => {
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    [s[left], s[right]] = [s[right], s[left]];
+    left++;
+    right--;
+  }
+};
+
+// O(n) O(1);
+
+// 680. Valid Palindrome II
+
+const validPalindrome = (s) => {
+  const helper = (str, left, right) => {
+    while (left < right) {
+      if (str[left] !== str[right]) return false;
+      left++;
+      right--;
+    }
+    return true;
+  };
+
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return helper(s, left + 1, right) || helper(s, left, right - 1);
+    }
+    left++;
+    right--;
+  }
+  return true;
+};
+
+// time O(n)
+// space O(1)
+
+// 1029. Two City Scheduling
+const twoCityFly = (costs) => {
+  costs.sort((a, b) => a[0] - a[1] - (b[0] - b[1]));
+  let n = costs.length / 2;
+  let total = 0;
+
+  for (let i = 0; i < n; i++) {
+    total += costs[i][0];
+  }
+  for (let i = n; i < 2 * n; i++) {
+    total += costs[i][1];
+  }
+  return total;
+};
+
+// time O(nlogn)
+// space O(1)
+
+// Relative Sort Array
+const revertSortingArray = (arr1, arr2) => {
+  const map = new Map();
+  arr2.forEach((val, index) => {
+    map.set(val, index);
+  });
+  return arr1.sort((a, b) => {
+    if (map.has(a) && map.has(b)) return map.get(a) - map.get(b);
+    else if (map.has(a)) return -1;
+    else if (map.has(b)) return 1;
+    else return a - b;
+  });
+};
+
+//time O(n log n)  n = arr1.length
+// space O(M) m = arr2.length;
