@@ -131,3 +131,26 @@ const dfs = (node, isLeft) => {
 
 // time O(n)
 // space O(n) / O(logn)
+
+// Binary Tree Paths
+const binaryTreePaths = (root) => {
+  const result = [];
+  dfs(root, path);
+  return result;
+};
+
+function dfs(node, path) {
+  if (!node) return;
+
+  path += node.val;
+
+  if (!node.left && !node.right) result.push(path);
+  else {
+    path += "->";
+    dfs(node.left, path);
+    dfs(node.right, path);
+  }
+}
+
+// time O(n)
+// space O(n) if banlanced O(logn)
