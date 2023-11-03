@@ -114,7 +114,7 @@ dotVet.prototype.dotProduct = function (vec) {
   let result = 0;
 
   for (let i in this.data) {
-    let index = parse(i);
+    let index = parseInt(i);
     if (vec.data[index] !== undefined)
       result += vec.data[index] * this.data[index];
   }
