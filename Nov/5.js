@@ -81,3 +81,165 @@ const minRemoveParent = (s) => {
 
 // time O(n) n = s.length;
 // space O(n);
+
+const ocean = (heights) => {
+  let maxHeight = 0;
+  const result = [];
+  for (let i = heights.length - 1; i >= 0; i--) {
+    if (heights[i] > maxHeight) {
+      result.push(i);
+      maxHeight = heights[i];
+    }
+  }
+
+  return result.reverse();
+};
+
+// time O(n) which n = number of building inside array
+// space O(n) n = result of element number
+
+const vector = (nums) => {
+  this.data = {};
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) this.data[i] = nums[i];
+  }
+};
+
+vector.prototype.fun1 = function (vec) {
+  let result = 0;
+
+  for (let key in this.data) {
+    const index = parseInt(key);
+    if (vec.data[index] !== undefined) {
+      result = result + vec.data[index] * this.data[index];
+    }
+  }
+
+  return result;
+};
+
+const test3 = (p, q) => {
+  // get the path
+  // move to same height
+  // check the node
+
+  const height = (node) => {
+    let height = 0;
+    while (node) {
+      node = node.parent;
+      height++;
+    }
+    return height;
+  };
+
+  let lenQ = height(q);
+  let lenP = height(p);
+
+  if (lenP > lenQ) {
+    [lenP, lenQ] = [lenQ, lenP];
+    [p, q] = [q, p];
+  }
+
+  while (lenQ > lenP) {
+    lenQ--;
+    q = q.parent;
+  }
+
+  while (p !== q) {
+    p = p.parent;
+    q = q.parent;
+  }
+
+  return p;
+};
+
+const deleteOne = (s) => {
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    if (s[left] !== s[right])
+      return helper(left + 1, right, s) || helper(left, right - 1, s);
+    left++;
+    right--;
+  }
+  return true;
+
+  function helper(l, r, s) {
+    while (l < r) {
+      if (s[l] !== s[r]) return false;
+      l++;
+      r--;
+    }
+    return true;
+  }
+};
+
+const lestedListSum = (lestedList) => {
+  function dfs(list, depth) {
+    let sum = 0;
+    for (let item of list) {
+      if (item.isInteger()) {
+        sum = sum + item.getInteger() * depth;
+      } else {
+        sum = sum + dfs(item.getList(), depth + 1);
+      }
+    }
+    return sum;
+  }
+
+  return dfs(lestedList, 1);
+};
+
+const test5 = (s) => {
+  let lastOp = "+";
+  let num = 0;
+  const nums = [];
+
+  for (let i = 0; i < s.length; i++) {
+    const char = s[i];
+
+    if (char >= "0" && char <= "9") {
+      num = num * 10 + parseInt(char);
+    }
+    if ("+-*/".includes(char) || i === s.length - 1) {
+      if (lastOp === "+") nums.push(num);
+      else if (lastOp === "-") nums.push(-num);
+      else if (lastOp === "*") nums.push(nums.pop() * num);
+      else if (lastOp === "/") nums.push(Math.trunc(nums.pop() / num));
+
+      num = 0;
+      lastOp = char;
+    }
+  }
+
+  return nums.reduce((acc, cur) => acc + cur, 0);
+};
+
+// time O(n) which n is the length of string
+
+const test4 = (w) => {
+  this.preFixSums = [];
+  let preFixSum = 0;
+
+  for (let weight of w) {
+    preFixSum = preFixSum + weight;
+    this.preFixSums.push(preFixSum);
+  }
+  this.totalSum = preFixSum;
+};
+
+test4.prototype.tt = function () {
+  const target = this.totalSum * Math.random();
+
+  let left = 0;
+  let right = this.preFixSums.length - 1;
+
+  while (left < right) {
+    const mid = Math.floor((left + right) / 2);
+    if (target > this.preFixSums[mid]) left = mid + 1;
+    else right = mid;
+  }
+
+  return left;
+};
