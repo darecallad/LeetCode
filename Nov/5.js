@@ -220,13 +220,13 @@ const test5 = (s) => {
 
 const test4 = (w) => {
   this.preFixSums = [];
-  let preFixSum = 0;
+  let preFixsum = 0;
 
   for (let weight of w) {
-    preFixSum = preFixSum + weight;
-    this.preFixSums.push(preFixSum);
+    preFixsum = preFixsum + weight;
+    this.preFixSums.push(preFixsum);
   }
-  this.totalSum = preFixSum;
+  this.totalSum = preFixsum;
 };
 
 test4.prototype.tt = function () {
@@ -240,6 +240,141 @@ test4.prototype.tt = function () {
     if (target > this.preFixSums[mid]) left = mid + 1;
     else right = mid;
   }
-
   return left;
+};
+
+const ttt = (order, s) => {
+  const map = new Map();
+  let result = "";
+
+  for (let char of s) {
+    map.set(char, (map.get(char) || 0) + 1);
+  }
+  for (let char of order) {
+    while (map.get(char)) {
+      result = result + char;
+      map.set(char, map.get(char) - 1);
+    }
+  }
+  for (let [char, count] of map.entries()) {
+    result = result + char.repeat(count);
+  }
+
+  return result;
+};
+
+const lastest = (nums, k) => {
+  const minHeap = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    if (i < k) {
+      minHeap.push(nums[i]);
+      // function
+      heapfy();
+    } else if (nums[i] > minHeap[0]) {
+      minHeap[0] = nums[i];
+      shiftDown();
+    }
+  }
+
+  return minHeap[0];
+
+  function heapfy() {
+    let index = minHeap.length - 1;
+
+    while (index > 0) {
+      let parent = Math.floor((index - 1) / 2);
+      if (minHeap[parent] > minHeap[index]) {
+        [minHeap[index], minHeap[parent]] = [minHeap[parent], minHeap[index]];
+        index = parent;
+      } else break;
+    }
+  }
+
+  function shiftDown() {
+    let index = 0;
+    while (index * 2 + 1 < minHeap.length) {
+      let left = index * 2 + 1;
+      let right = index * 2 + 2;
+      let smallest = index;
+
+      if (minHeap[left] < minHeap[smallest]) smallest = left;
+      if (right < minHeap.length && minHeap[right] < minHeap[smallest])
+        smallest = right;
+      if (index !== smallest) {
+        [minHeap[index], minHeap[smallest]] = [
+          minHeap[smallest],
+          minHeap[index],
+        ];
+        index = smallest;
+      } else break;
+    }
+  }
+};
+
+const iWich = (w) => {
+  this.preFixSums = [];
+  let preFixSum = 0;
+
+  for (let weight of w) {
+    preFixSum += weight;
+    this.preFixSums.push(preFixSum);
+  }
+  this.totalSum = preFixSum;
+};
+
+iWich.prototype.je = function () {
+  let target = this.totalSum * Math.random();
+
+  let left = 0;
+  let right = this.preFixSums.length - 1;
+
+  while (left < right) {
+    const mid = Math.floor((left + right) / 2);
+    if (target > this.preFixSums[mid]) left = mid + 1;
+    else right = mid;
+  }
+  return left;
+};
+
+const check = (root, low, high) => {
+  if (!root) return 0;
+  let result = 0;
+
+  if (root.val >= low) result = result + check(root.left, low, high);
+  if (root.val >= low && root.val <= high) result = result + root.val;
+  if (root.val <= high) result = result + check(root.right, low, high);
+
+  return result;
+};
+
+const ppppath = (path) => {
+  const dict = path.split("/");
+  const stack = [];
+
+  for (let char of dict) {
+    if (char === "..") stack.pop();
+    else if (char && char !== ".") stack.push(char);
+  }
+  return "/" + stack.join("/");
+};
+
+const groupString = (strings) => {
+  const map = new Map();
+  for (let string of strings) {
+    const key = helper(string);
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(string);
+  }
+  return Array.from(map.values());
+};
+
+const helper = (string) => {
+  let key = "";
+
+  for (let i = 1; i < string.length; i++) {
+    const shift = (string.charCodeAt(i) - string.charCodeAt(i - 1) + 26) % 26;
+    key += String.fromCharCode("a".charCodeAt(0) + shift) + ",";
+  }
+  return key;
 };
