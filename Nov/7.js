@@ -277,3 +277,47 @@ const badVersion = (isBad) => {
     return isBad(left) ? left : -1;
   };
 };
+
+let emp = [
+  { name: "abc", age: 30 },
+  { name: "bbb", age: 25 },
+  { name: "ccc", age: 20 },
+  { name: "ddd", age: 35 },
+  { name: "eee", age: 23 },
+];
+
+const show = emp.filter((value) => value.age < 30);
+
+const divSelevt = document.getElementById("app");
+
+const htmlContent = show
+  .map((s) => `<div> Name: ${s.name} Age: ${s.age}</div>`)
+  .join("");
+
+divSelevt.innerHTML = htmlContent;
+
+const testP = new Promise((resolve, reject) => {
+  let value = 5;
+  if (value) resolve("Great");
+  else reject("Not");
+});
+
+testP.then((res) => console.log(res)).catch((err) => console.log(err));
+
+function EmployeeNames() {
+  this.names = [];
+}
+EmployeeNames.prototype = {
+  showNames: function () {
+    return this.names;
+  },
+};
+
+var e1 = new EmployeeNames();
+e1.names.push("foo");
+console.log(e1.showNames());
+var e2 = new EmployeeNames();
+e2.names.push("foo");
+console.log(e2.showNames());
+
+// onBlur => emenet losese foces / user click away from the element
