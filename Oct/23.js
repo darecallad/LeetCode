@@ -235,3 +235,26 @@ myQueue.prototype.empty = () => {
 
 // time O(1) constant time
 // space O(n) n = number of element in the Q
+
+const Roman_Map = {
+  M: 1000,
+  D: 500,
+  C: 100,
+  L: 50,
+  X: 10,
+  V: 5,
+  I: 1,
+};
+
+const romanToInt = (str) => {
+  let result = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    const cur = Roman_Map[str[i]];
+    const next = Roman_Map[str[i + 1]];
+
+    if (next > cur) result -= cur;
+    else result += cur;
+  }
+  return result;
+};
