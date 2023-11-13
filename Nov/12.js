@@ -106,3 +106,56 @@ function carrrrrry(func) {
     } else return carrrrried.bind(this, ...args);
   };
 }
+
+function cadddwad(fn) {
+  return function carried(...args) {
+    if (args.length > fn.length) return fn.apply(this, args);
+    else return carried.bind(this, ...args);
+  };
+}
+
+function debouced(fn, wait) {
+  let timeoutid;
+  return function (...args) {
+    clearTimeout(timeoutid);
+    timeoutid = setTimeout(() => {
+      fn.apply(this, args);
+    }, wait);
+  };
+}
+
+function basicTro(fn, wait) {
+  let timer;
+  let lastArgs = [];
+
+  return function (...args) {
+    if (!timer) {
+      fn.apply(this, args);
+      timer = setTimeout(() => {
+        if (lastArgs.length) {
+          fn.apply(this, lastArgs);
+          timer = null;
+          lastArgs = [];
+        }
+      }, wait);
+    } else lastArgs = [...args];
+  };
+}
+
+function basicT(fn, wait) {
+  let timer;
+  let lastArgs = [];
+
+  return function (...args) {
+    if (!timer) {
+      fn.apply(this, args);
+      timer = setTimeout(() => {
+        if (lastArgs.length) {
+          fn.apply(this, lastArgs);
+          timer = null;
+          lastArgs = [];
+        }
+      }, wait);
+    } else lastArgs = [...args];
+  };
+}
