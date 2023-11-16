@@ -243,7 +243,7 @@ const helper = (rootA, target) => {
   let path = [];
   let node = target;
   while (node !== rootA && node.parentNode) {
-    const children = node.parentNode.children;
+    const children = Array.from(node.parentNode.children);
     path.push(children.indexOf(node));
     node = node.parentNode;
   }
@@ -439,3 +439,72 @@ function curry(func) {
 }
 
 curry.placeholder = Symbol();
+
+// Invert binart tree
+const invert = (node) => {
+  const nodes = [node]; //O(n) O(w)
+  while (nodes.length) {
+    const pop = nodes.shift();
+    if (pop) {
+      [pop.left, pop.right] = [pop.right, pop.left];
+      nodes.push(pop.left, pop.right);
+    }
+  }
+  return node;
+};
+
+// reverse Linked List
+const rever = (list) => {
+  let next = null;
+  let prev = null;
+
+  while (list) {
+    next = list.next; //O(n) O(1)
+    list.next = prev;
+    prev = list;
+    list = next;
+  }
+  return prev;
+};
+function akdjaspidj(list) {
+  if (!list || !list.next) return list;
+
+  let newHead = akdjaspidj(list.next);
+
+  list.next.next = list;
+  list.next = null;
+
+  return newHead;
+}
+
+// DOM / JQuery
+function $(e1) {
+  return new Wrapper(e1);
+}
+
+class Wrapper {
+  constructor(e1) {
+    this.e1 = e1;
+  }
+  css(propertyName, value) {
+    this.e1.style[propertyName] = value;
+    return this;
+  }
+}
+//Memo
+function memo(func, resolver) {
+  const cache = new Map();
+
+  return function (...args) {
+    const key = resolver ? resolver(...args) : args.join("_");
+    const cacheResult = cache.get(key);
+
+    if (cacheResult?.has(this)) return cacheResult.get(this);
+
+    const result = func.apply(this, args);
+    if (!cacheResult) {
+      cache.set(key, new Map([[this, result]]));
+    } else cacheResult.set(this, result);
+    return result;
+  };
+}
