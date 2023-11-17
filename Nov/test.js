@@ -108,7 +108,7 @@ function throttle(func, wait, options = {}) {
 const decode = (message) => {
   if (!message.length || !message[0].length) return "";
   let row = 0; //O(n) n = length of first string
-  let col = 0;
+  let col = 0; // O(1)
   let isTop = true;
   let result = "";
 
@@ -508,3 +508,166 @@ function memo(func, resolver) {
     return result;
   };
 }
+
+//Memo One
+function defaultIsEqual(a, b) {
+  if (a.length !== b.length) return false;
+  return a.every((item, i) => item === b[i]);
+}
+
+function memoizeOne(func, isEqual = defaultIsEqual) {
+  let lastArgs = [];
+  let lastThis = null;
+  let lastResult = null;
+  let isCalled = false;
+
+  return function (...args) {
+    if (isCalled && lastThis === this && isEqual(lastArgs, args))
+      return lastResult;
+
+    lastResult = func.call(this, ...args);
+    lastArgs = args;
+    lastThis = this;
+    isCalled = true;
+
+    return lastResult;
+  };
+}
+
+// animation
+let elem = document.getElementById("myElement");
+let position = 0;
+let distance = 1000;
+let duration = 100;
+let interval = 10;
+let step = distance / (duration / interval);
+
+function move() {
+  position = position + step;
+  elem.style.left = position + "px";
+
+  if (position < distance) {
+    setTimeout(move, interval);
+  }
+}
+move();
+
+let intervalId = setInterval(function () {
+  position = position + step;
+  elem.style.left = position + "px";
+
+  if (position >= distance) {
+    clearInterval(intervalId);
+  }
+}, interval);
+
+// K-element
+const kElement = (arr, k) => {
+  const minHeap = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (i < k) {
+      minHeap.push(arr[i]);
+      heapfy();
+    } else if (arr[i] > minHeap[0]) {
+      minHeap[0] = arr[i];
+      shiftDown();
+    }
+  }
+
+  return miniHeap[0];
+
+  function heapfy() {
+    let index = minHeap.length - 1;
+    while (index > 0) {
+      let parent = Math.floor((index - 1) / 2);
+      if (minHeap[parent] > minHeap[index]) {
+        [minHeap[index], minHeap[parent]] = [minHeap[parent], minHeap[index]];
+        index = parent;
+      } else break;
+    }
+  }
+
+  function shiftDown() {
+    let index = 0;
+    while (index * 2 + 1 < minHeap.length) {
+      let left = index * 2 + 1;
+      let right = index * 2 + 2;
+      let smallest = index;
+
+      if (minHeap[left] < minHeap[smallest]) smallest = left;
+      if (minHeap[right] < minHeap[smallest] && right < minHeap.length)
+        smallest = right;
+      if (index !== smallest) {
+        [minHeap[index], minHeap[smallest]] = [
+          minHeap[smallest],
+          minHeap[index],
+        ];
+        index = smallest;
+      } else break;
+    }
+  }
+};
+
+function bubbleSort(arr) {
+  const len = arr.length;
+
+  for (let i = 0; i < len; i++) {
+    for (let j = 0; j < len; j++) {
+      if (arr[j] > arr[j + 1]) {
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+      }
+    }
+  }
+
+  return arr;
+}
+function renderHtml(text, styles) {
+  // Sort styles by start index
+  styles.sort((a, b) => a[0] - b[0]);
+
+  let result = "";
+  let lastIndex = 0;
+
+  styles.forEach((style) => {
+    // Add text before the current style if any
+    if (style[0] > lastIndex) {
+      result += text.slice(lastIndex, style[0]);
+    }
+
+    // Apply the current style
+    result +=
+      `<${style[2]}>` + text.slice(style[0], style[1] + 1) + `</${style[2]}>`;
+
+    // Update the lastIndex
+    lastIndex = style[1] + 1;
+  });
+
+  // Add any remaining text after the last style
+  if (lastIndex < text.length) {
+    result += text.slice(lastIndex);
+  }
+
+  return result;
+}
+
+let timeout1Executed = false;
+let timeout2Executed = false;
+
+const timeout1 = setTimeout(() => {
+  console.log("Timeout 1");
+  timeout1Executed = true;
+}, 3000);
+const timeout2 = setTimeout(() => {
+  console.log("Timeout 2");
+  timeout2Executed = true;
+}, 5000);
+
+// Call clearAll function
+clearAll();
+
+// Check if the timeouts are cleared after a short delay
+setTimeout(() => {
+  console.log("Timeout 1 executed:", timeout1Executed);
+  console.log("Timeout 2 executed:", timeout2Executed);
+}, 100); // short delay to allow immediate timeouts to execute

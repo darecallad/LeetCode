@@ -767,3 +767,303 @@ const testMemo = (n) => {
 const ressss = (n) => n % 2;
 const testResult = mememe(testMemo);
 console.log(testResult(5));
+
+function defaultEqual(a, b) {
+  if (a.length !== b.length) return false;
+  return a.every((item, i) => item === b[i]);
+}
+
+function memoOne(func, isEqual = defaultEqual) {
+  let lastArgs = [];
+  let lastThis = null;
+  let lastResult = null;
+  let isCalled = false;
+
+  return function (...args) {
+    if (isCalled && lastThis === this && isEqual(lastArgs, args))
+      return lastResult;
+
+    lastResult = func.call(this, ...args);
+    lastArgs = args;
+    lastThis = this;
+    isCalled = true;
+
+    return lastResult;
+  };
+}
+
+function defaultEqual(a, b) {
+  if (a.length !== b.length) return false;
+  return a.every((item, i) => item === b[i]);
+}
+
+function memememOne(func, isEqual = defaultEqual) {
+  let lastArgs = [];
+  let lastThis = null;
+  let lastResult = null;
+  let isCalled = false;
+
+  return function (...args) {
+    if (isCalled && lastThis === this && isEqual(lastArgs, args))
+      return lastResult;
+
+    lastResult = func.call(this, ...args);
+    lastArgs = args;
+    lastThis = this;
+    isCalled = true;
+
+    return lastResult;
+  };
+}
+
+const fladst = (arr, depth = 1) => {
+  const result = [];
+  for (let item of arr) {
+    if (Array.isArray(item) && depth > 0) {
+      result.push(...fladst(item, depth - 1));
+    } else result.push(item);
+  } //O(n + d) // O(n)
+  return result;
+};
+
+const adiwajid = (arr, depth = 1) => {
+  return arr.reduce((acc, curr) => {
+    if (Array.isArray(curr) && depth > 0) {
+      acc.push(...adiwajid(curr, depth - 1));
+    } else acc.push(curr);
+
+    return acc;
+  });
+};
+
+const akwdwajd = (arr, depth = 1) => {
+  const stack = arr.map((item) => [item, depth]);
+  const result = [];
+
+  while (stack.length) {
+    const [item, depth] = stack.pop();
+    if (Array.isArray(item) && depth > 0) {
+      stack.push(...item.map((subItem) => [subItem, depth - 1]));
+    } else result.push(item);
+  }
+  return result.reverse();
+};
+
+const defeiaf = (func, wait) => {
+  let timer = null;
+  return function (...args) {
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
+  };
+};
+
+const fauenfef = (func, wait, option = { leading: false, trailing: true }) => {
+  let timer = null;
+  let { leading, trailing } = option;
+
+  return function (...args) {
+    let isInvoked = false;
+    if (!timer && leading) {
+      func.apply(this, args);
+      isInvoked = true;
+    }
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      if (!isInvoked && trailing) {
+        func.apply(this, args);
+      }
+      timer = null;
+    }, wait);
+  };
+};
+
+function deiajfi(func, wait, option = { leading: false, trailing: true }) {
+  let timer = null;
+  let { leading, trailing } = option;
+
+  return function (...args) {
+    let isInvoked = false;
+    if (!timer && leading) {
+      func.apply(this, args);
+      isInvoked = true;
+    }
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      if (!isInvoked && trailing) {
+        func.apply(this, args);
+      }
+      timer = null;
+    }, wait);
+  };
+}
+
+function eehaeit(func, wait) {
+  let lastLags = null;
+  let lastThis = null;
+  let timer = null;
+
+  const invokedFunction = () => {
+    if (lastLags) {
+      func.apply(lastThis, lastLags);
+      lastLags = null;
+      lastThis = null;
+      timer = window.setTimeout(invokedFunction, wait);
+    } else timer = null;
+  };
+
+  return function (...args) {
+    if (!timer) {
+      func.apply(this, args);
+      timer = setTimeout(invokedFunction, wait);
+    } else {
+      lastLags = args;
+      lastThis = this;
+    }
+  };
+}
+
+function aidjawijd(func, wait) {
+  let timer = null;
+  let lastArgs = null;
+  let lastThis = null;
+
+  const setTimer = () => {
+    if (lastArgs) {
+      func.apply(lastThis, lastArgs);
+      lastArgs = null;
+      lastThis = null;
+      timer = window.setTimeout(setTimer, wait);
+    } else timer = null;
+  };
+
+  return function (...args) {
+    if (!timer) {
+      func.apply(this, args);
+      timer = window.setTimeout(setTimer, wait);
+    } else {
+      lastArgs = args;
+      lastThis = this;
+    }
+  };
+}
+
+function adkjawd(func, wait, option = { leading: true, trailing: true }) {
+  let timer = null;
+  let lastArgs = null;
+  let lastThis = null;
+  let { leading, trailing } = option;
+
+  const setTimer = () => {
+    if (lastArgs && trailing) {
+      func.apply(lastThis, lastArgs);
+      lastArgs = null;
+      lastThis = null;
+      timer = window.setTimeout(setTimer, wait);
+    } else timer = null;
+  };
+
+  return function (...args) {
+    if (!timer) {
+      if (leading) {
+        func.apply(this, args);
+      }
+      timer = window.setTimeout(setTimer, wait);
+    } else {
+      lastArgs = args;
+      lastThis = this;
+    }
+  };
+}
+
+const decode = (message) => {
+  if (!message.length || !message[0].length) return "";
+
+  let row = 0;
+  let col = 0;
+  let isTop = true;
+  let result = "";
+
+  while (col < message[0].length) {
+    if (isTop) result += message[row++][col++];
+    else result += message[row--][col++];
+
+    if (row === message.length - 1) isTop = false;
+    if (row === 0) isTop = true;
+  }
+
+  return result;
+};
+
+const firstBad = (isBad) => {
+  return (version) => {
+    let left = 1;
+    let right = version;
+    while (left < right) {
+      const mid = Math.floor((left + right) / 2);
+      if (isBad(mid)) right = mid - 1;
+      else left = mid + 1;
+    }
+    return isBad(left) ? left : -1;
+  };
+};
+
+class EventEmitter {
+  constructor() {
+    this.watcher = new Map();
+  }
+  subscribe(eventName, callback) {
+    let watcher = this.watcher;
+    if (!watcher.has(eventName)) watcher.set(eventName, [callback]);
+    else watcher.set(eventName, [...watcher.get(eventName), callback]);
+
+    return {
+      release: function () {
+        watcher.get(eventName).map((item, index) => {
+          if (item == callback) watcher.get(eventName).splice(index, 1);
+          else return item;
+        });
+      },
+    };
+  }
+
+  emit(eventName, ...args) {
+    if (this.watcher.has(eventName)) {
+      this.watcher.get(eventName).forEach((call) => {
+        call.apply(this, args);
+      });
+    }
+  }
+}
+
+function animation(element, duration, distance) {
+  let interval = 10;
+  let step = distance / (duration / interval);
+  let position = 0;
+  function move() {
+    position = position + step;
+    element.style.left = position + "px";
+
+    if (position < distance) {
+      setTimeout(move, interval);
+    }
+  }
+  move();
+}
+
+function curry(func) {
+  return function curried(...args) {
+    const complete =
+      args.length > func.length &&
+      !args.slice(0, func.length).includes(curry.placeholder);
+    if (complete) return func.apply(this, args);
+    return function (...newArgs) {
+      const res = args.map((arg) =>
+        arg === curry.placeholder && newArgs.length ? newArgs.shift() : arg
+      );
+
+      return curried(...res, ...newArgs);
+    };
+  };
+}
