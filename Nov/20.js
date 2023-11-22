@@ -734,15 +734,24 @@ class ewitej {
 
     return {
       release: () => {
+        // let found = false;
+        // const filteredCallbacks = this.watcher.get(eventName).filter((item) => {
+        //   if (!found && item === callback) {
+        //     found = true;
+        //     return false;
+        //   }
+        //   return true;
+        // });
+        // this.watcher.set(eventName, filteredCallbacks);
         let found = false;
-        const filteredCallbacks = this.watcher.get(eventName).filter((item) => {
-          if (!found && item === callback) {
+        const filterCallbacks = watcher.get(eventName).filter((item) => {
+          if (item === callback && !found) {
             found = true;
             return false;
           }
           return true;
         });
-        this.watcher.set(eventName, filteredCallbacks);
+        watcher.set(eventName, filterCallbacks);
       },
     };
   }
