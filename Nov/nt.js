@@ -403,6 +403,31 @@ function romanToInteger(str) {
   }
   return res;
 }
+// int to roman
+function romanToInteger(num) {
+  const table = {
+    M: 1000,
+    CM: 900,
+    D: 500, //O(1)
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1,
+  };
+  let str = "";
+  for (let i in table) {
+    let q = Math.floor(num / table[i]);
+    num %= table[i];
+    str += i.repeat(q);
+  }
+  return str;
+}
 // two way binding
 function twoway(state, element) {
   // condition 1. state change element change
@@ -485,6 +510,19 @@ function render(json) {
   }
 
   return element;
+}
+//DOM 22222222222222222222222222222222222222222
+function createElement(type, props, ...children) {
+  if (typeof type === "function") {
+    return type({ ...props, children });
+  }
+  return {
+    type,
+    props: {
+      ...props,
+      children,
+    },
+  };
 }
 // curry
 function curry(func) {
@@ -575,8 +613,8 @@ function memo(func, resolver) {
 // test
 const memoizedAdd = memo(add);
 console.log(memoizedAdd(1, 2));
-function customResolver(a, b) {
-  return a; // Only use the first argument for caching
+function customResolver(args) {
+  return args.sort().join("_");
 }
 const memoizedAddWithResolver = memo(add, customResolver);
 console.log(memoizedAddWithResolver(1, 2)); // 3
@@ -607,5 +645,464 @@ function sumArray(arr) {
   console.log("Calculating sum of:", arr);
   return arr.reduce((acc, val) => acc + val, 0);
 }
-const memoizedSum = memoOne(sumArray);
-console.log(memoizedSum([1, 2, 3]));
+function sumArrays(...arrays) {
+  const combinedArray = arrays.reduce((acc, arr) => acc.concat(arr), []);
+  return combinedArray.reduce((acc, val) => acc + val, 0);
+}
+// Animation
+function animateRight(element, duration, distance) {
+  let position = 0; // pros: simple, direct control, flexibility
+  let interval = 10; // cons: preformance issue (not smooth) -> drop frames
+  // let interval = new Date().getTime();
+  let step = distance / (duration / interval);
+  return function move() {
+    position = position + step;
+    element.style.right = position + "px";
+
+    if (position < distance) {
+      setTimeout(move, interval);
+    }
+  };
+}
+function animateRight(element, duration, distance) {
+  let startTime;
+  let position = 0; // pros: optimized for anmation, resources, frames rate adjustment
+  let step = distance / duration; // cons: overkill for simple task, less control, old browser dont support
+  function move() {
+    if (!startTime) startTime = timestamp;
+    const timeBetween = timestamp - startTime;
+    position = step * timeBetween;
+    if (position < distance) {
+      element.style.right = position + "px";
+      requestAnimationFrame(move);
+    } else {
+      element.style.right = position + "px";
+    }
+  }
+  function start() {
+    requestAnimationFrame(move);
+  }
+  return start;
+}
+const startAnimation = animateRight(element, 1000, 100);
+// k Element
+function topK(arr, k) {
+  const minHeap = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (i < k) {
+      minHeap.push(arr[i]);
+      heapfy();
+    } else if (arr[i] > minHeap[0]) {
+      minHeap[0] = arr[i];
+      shiftDown();
+    }
+  }
+  return minHeap[0];
+
+  function heapfy() {
+    let index = minHeap.length - 1;
+    while (index > 0) {
+      const parent = Math.floor((index - 1) / 2);
+      if (minHeap[parent] > minHeap[index]) {
+        [minHeap[index], minHeap[parent]] = [minHeap[parent], minHeap[index]];
+        index = parent;
+      } else break;
+    }
+  }
+  function shiftDown() {
+    let index = 0;
+    while (index * 2 + 1 < minHeap.length) {
+      let left = index * 2 + 1;
+      let right = index * 2 + 2;
+      let smallest = index;
+
+      if (minHeap[left] < minHeap[smallest]) smallest = left;
+      if (minHeap[right] < minHeap[smallest] && right < minHeap.length)
+        smallest = right;
+      if (smallest !== index) {
+        [minHeap[index], minHeap[smallest]] = [
+          minHeap[smallest],
+          minHeap[index],
+        ];
+        index = smallest;
+      } else break;
+    }
+  }
+}
+// Optimization
+function applyArraytoHTML(string, styles) {
+  let html = "";
+  let styleStack = []; // O(m + n)
+  let lastIndex = 0;
+  function closeStyle(currentIndex) {
+    while (
+      styleStack.length > 0 &&
+      styleStack[styleStack.length - 1][1] === currentIndex
+    ) {
+      const tag = styleStack.pop()[2];
+      html = html + `</${tag}>`;
+    }
+  }
+  for (let i = 0; i < string.length; i++) {
+    closeStyle(i);
+    while (lastIndex < styles.length && styles[lastIndex][0] === i) {
+      const [start, end, tag] = styles[lastIndex];
+      styleStack.push([start, end, tag]);
+      html = html + `<${tag}>`;
+      lastIndex++;
+    }
+    html = html + string[i];
+  }
+  closeStyle(string.length);
+  return html;
+}
+function getHeight(tree) {
+  let maxHeight = 0; //DFS O(N) O(H)
+  if (!tree) return maxHeight;
+  for (let child of tree.children) {
+    maxHeight = Math.max(maxHeight, getHeight(child));
+  }
+  return maxHeight + 1;
+}
+// tree Height
+function getHight(tree) {
+  let height = 0; //BFS O(N) O(W)
+  if (!tree) return height;
+  let q = [[tree, 1]];
+  while (q.length) {
+    const [node, h] = q.shift();
+    height = Math.max(h, height);
+    for (let child of node.children) {
+      q.push([child, h + 1]);
+    }
+  }
+  return height;
+}
+function getHeight(tree) {
+  let height = 0;
+  if (!tree) return height;
+  let q = [[tree, 1]];
+  while (q.length) {
+    const [node, h] = q.shift();
+    height = Math.max(h, height);
+    for (let child of node.children) {
+      q.push([child, h + 1]);
+    }
+  }
+  return height;
+}
+// DOM tags
+function getTags(tree) {
+  const set = new Set();
+  const stack = [tree];
+  // O(n) O(n)
+  while (stack.length) {
+    const node = stack.pop();
+    set.add(node.tagName.toLowerCase());
+    stack.push(...node.children);
+  }
+  return Array.from(set);
+}
+// Next Right
+function nextRight(root, target) {
+  if (!root) return null; //O(N) O(W)
+  const queue = [root, null];
+  while (queue.length) {
+    const node = queue.shift();
+    if (node === target) return queue.shift();
+    else if (node === null && queue.length) queue.push(null);
+    else queue.push(...node.children);
+  }
+  return null;
+}
+// traves DOM
+function travesDOM(root) {
+  if (root === null) return []; // O(N) O(W)
+  const q = [root];
+  const result = [];
+  while (q.length) {
+    const top = q.shift();
+    result.push(top);
+    q.push(...top.children);
+  }
+  return result;
+}
+//serialize
+function serialize(root) {
+  if (!root) return "_"; //O(n) O(h)
+  return `${root.value},${serialize(root.left)},${serialize(root.right)}`;
+}
+function deserialize(str) {
+  const q = str.split(",");
+  return dfs(q);
+
+  function dfs(q) {
+    if (!q.length) return null;
+    const n = q.shift();
+    if (n !== "_") {
+      const node = new Node(n.value);
+      node.left = dfs(q);
+      node.right = dfs(q);
+      return node;
+    }
+    return null;
+  }
+}
+// to be not to be
+function toBe(input) {
+  // O(1)
+  return {
+    not: {
+      toBe: function (val) {
+        if (input === 0 && val === 0 && !Object.is(input, val)) return;
+        if (input === val) throw "Not Equal";
+      },
+    },
+    toBe: function (val) {
+      if (Number.isNaN(input) && Number.isNaN(val)) return;
+      if (input !== val) throw "Not Equal";
+    },
+  };
+}
+// ClassName
+function className(...args) {
+  return args
+    .flat(Infinity)
+    .reduce((result, item) => {
+      if (item === null) return result;
+      switch (typeof item) {
+        case "string":
+        case "number":
+          result.push(item); //O(N * M)
+          break;
+        case "object":
+          for (let [key, value] of Object.entries(item)) {
+            if (!!value) result.push(key);
+          }
+          break;
+      }
+      return result; // O(N+K)
+    }, [])
+    .join(" ");
+}
+//Search element right after target // right before // last index // first Index
+function element(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+  //O(log n) O(1)
+  while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    if (arr[mid] <= target) {
+      // if(arr[mid] >= target) right = mid -1
+      left = mid + 1;
+    } else right = mid - 1;
+  }
+  return arr[left - 1] === target ? arr[left] : undefined;
+  return arr[right];
+  return arr[left - 1] === target ? left - 1 : -1;
+  return arr[right + 1] == target ? right + 1 : -1;
+}
+// Promise race, any
+function race(promise) {
+  return new Promise((res, rej) => {
+    for (let i in promise) Promise.resolve(promises[i]).then(res).catch(rej);
+    // O(N)
+  });
+}
+function any(promises) {
+  return new Promise((resolve, reject) => {
+    let isFulfilled = false;
+    const errors = [];
+    let errorCount = 0;
+    promises.forEach((promise, index) =>
+      promise.then(
+        (data) => {
+          if (!isFulfilled) {
+            resolve(data);
+            isFulfilled = true;
+          }
+        },
+        (error) => {
+          errors[index] = error;
+          errorCount += 1;
+
+          if (errorCount === promises.length) {
+            reject(new AggregateError("none resolved", errors));
+          }
+        }
+      )
+    );
+  });
+}
+function allSettled(promises) {
+  const op = [];
+  let promisesToComplete = promises.length;
+
+  return new Promise((res) => {
+    if (!promises.length) res([]);
+
+    for (let i in promises) {
+      Promise.resolve(promises[i])
+        .then((value) => {
+          op[i] = { status: "fulfilled", value };
+        })
+        .catch((reason) => {
+          op[i] = { status: "rejected", reason };
+        })
+        .finally(() => {
+          if (!--promisesToComplete) res(op);
+        });
+    }
+  });
+}
+function all(promises) {
+  const op = [];
+  let promisesToComplete = promises.length;
+
+  return new Promise((res, rej) => {
+    if (!promises.length) res([]);
+
+    for (let i in promises) {
+      Promise.resolve(promises[i])
+        .then((data) => {
+          op[i] = data;
+          if (!--promisesToComplete) res(op);
+        })
+        .catch(rej);
+    }
+  });
+}
+class FakeTimer {
+  constructor() {
+    this.original = {
+      setTimeout: window.setTimeout,
+      clearTimeout: window.clearTimeout,
+      dateNow: Date.now,
+    };
+    this.timerId = 1;
+    this.currentTime = 0;
+    this.queue = [];
+  }
+  install() {
+    window.setTimeout = (cb, time, ...args) => {
+      const id = this.timerId++;
+      this.queue.push({
+        id,
+        cb,
+        time: time + this.currentTime,
+        args,
+      });
+      this.queue.sort((a, b) => a.time - b.time);
+      return id;
+    };
+    window.clearTimeout = (removeId) => {
+      this.queue = this.queue.filter(({ id }) => id !== removeId);
+    };
+    Date.now = () => {
+      return this.currentTime;
+    };
+  }
+
+  uninstall() {
+    window.setTimeout = this.original.setTimeout;
+    window.clearTimeout = this.original.clearTimeout;
+    Date.now = this.original.dateNow;
+  }
+
+  tick() {
+    while (this.queue.length) {
+      const { cb, time, args } = this.queue.shift();
+      this.currentTime = time;
+      cb(...args);
+    }
+  }
+}
+class MyPromise {
+  constructor(executor) {
+    this.state = "pending";
+    this.handlers = [];
+    try {
+      executor(this._resolve.bind(this), this._reject.bind(this));
+    } catch (err) {
+      this._reject(err);
+    }
+  }
+
+  then(onFulfilled, onRejected) {
+    return new MyPromise((resolve, reject) => {
+      this.handlers.push({
+        fulfilled: (value) => {
+          if (typeof onFulfilled !== "function") {
+            resolve(value);
+            return;
+          }
+          try {
+            resolve(onFulfilled(value));
+          } catch (err) {
+            reject(err);
+          }
+        },
+        rejected: (error) => {
+          if (typeof onRejected !== "function") {
+            reject(error);
+            return;
+          }
+
+          try {
+            resolve(onRejected(error));
+          } catch (err) {
+            reject(err);
+          }
+        },
+      });
+
+      this._executeHandlers();
+    });
+  }
+
+  _executeHandlers() {
+    if (this.state === "pending") return;
+    for (const handler of this.handlers) {
+      queueMicrotask(() => {
+        handler[this.state](this.result);
+      });
+    }
+
+    this.handlers = [];
+  }
+
+  _resolve(value) {
+    if (this.state !== "pending") return;
+    if (value instanceof MyPromise) {
+      value.then(this._resolve.bind(this), this._reject.bind(this));
+      return;
+    }
+
+    this.state = "fulfilled";
+    this.result = value;
+    this._executeHandlers();
+  }
+
+  _reject(error) {
+    if (this.state !== "pending") return;
+    this.state = "rejected";
+    this.result = error;
+    this._executeHandlers();
+  }
+
+  catch(onRejected) {
+    return this.then(undefined, onRejected);
+  }
+
+  static resolve(value) {
+    return new MyPromise((resolve) => {
+      resolve(value);
+    });
+  }
+
+  static reject(value) {
+    return new MyPromise((resolve, reject) => {
+      reject(value);
+    });
+  }
+}
