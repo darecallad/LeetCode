@@ -146,9 +146,9 @@ function firstBadVersion(isBad) {
     let left = 1;
     let right = version;
 
-    while (left < right) {
+    while (left <= right) {
       const mid = Math.floor((left + right) / 2);
-      if (isBad(mid)) right = mid;
+      if (isBad(mid)) right = mid - 1;
       else left = mid + 1;
     }
     return isBad(left) ? left : -1;
@@ -212,7 +212,7 @@ function findCorrespondingNode(rootA, rootB, target) {
   }
 }
 function findCorrespondingNode(rootA, rootB, target) {
-  stack = [[rootA, rootB]]; // time O(n) space O(n) space n = store in stack
+  stack = [[rootA, rootB]]; // time O(n) space O(h) space n = store in stack
   while (stack.length) {
     // avoid overflow / complex and use more space
     const [leftNode, rightNode] = stack.pop();
@@ -268,6 +268,15 @@ function sort(items, newOrder) {
     }
   }
 }
+function sort(items, newOrder) {
+  for (let i = 0; i < items.length; i++) {
+    const index = newOrder[i];
+    if (index === i) continue;
+    [items[i], items[indx]] = [items[indx], items[i]];
+    [newOrder[i], newOrder[indx]] = [newOrder[indx], newOrder[i]];
+    i--;
+  }
+}
 // clear Timeout
 function clearAllTimeOut() {
   let id = window.setTimeout(null, 0); // time O(n) space O(1)
@@ -281,7 +290,7 @@ const originT = window.setTimeout;
 // pros: efficiency
 // cons: overhead -> modify global Settimeout
 const resultIds = new Set();
-window.timeoutIds = (callback, wait) => {
+window.setTimeout = (callback, wait) => {
   const timer = originT.call(this, callback, wait);
   resultIds.add(timer);
   return timer;
@@ -366,13 +375,13 @@ function mySqrt(x) {
 function getNthNum(n) {
   let result = "1";
   for (let i = 1; i < n; i++) {
-    result = helper(result); // time O(m*n) space O(m)
+    result = helper(result); // time O(2^n)
   }
   return result;
 }
 function helper(number) {
   let count = 1;
-  let nth = ""; // time O(n) sapce O(m)
+  let nth = "";
   for (let i = 0; i < number.length; i++) {
     if (number[i] === number[i + 1]) count++;
     else {
@@ -381,6 +390,28 @@ function helper(number) {
     }
   }
   return nth;
+}
+function getNthNum(n) {
+  let nthNum = "1"; //O(m^2)^n
+  while (n > 1) {
+    let str = nthNum;
+    let res = "";
+    let lastchar = str[0];
+    let lastcharCount = 1;
+
+    for (let i = 1; i <= str.length; i++) {
+      if (str[i] == lastchar) {
+        lastcharCount++;
+      } else {
+        res += `${lastcharCount}${lastchar}`;
+        lastchar = str[i];
+        lastcharCount = 1;
+      }
+    }
+    nthNum = res;
+    n--;
+  }
+  return nthNum;
 }
 // Roman
 function romanToInteger(str) {
