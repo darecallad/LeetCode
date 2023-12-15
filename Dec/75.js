@@ -566,3 +566,439 @@ var canJump = function (nums) {
   }
   return maxReach >= nums.length - 1;
 };
+
+var cloneGraph = function (node) {
+  if (!node) return null;
+  const map = new Map();
+
+  function dfs(node) {
+    if (map.has(node)) return map.get(node);
+    let cloneNode = new Node(node.val, []);
+    map.set(node, cloneNode);
+
+    for (let neighbor of node.neighbors) {
+      cloneNode.neighbors.push(dfs(neighbor));
+    }
+    return cloneNode;
+  }
+  return dfs(node);
+};
+
+var cloneGraph = function (node) {
+  if (!node) return null;
+  const map = new Map();
+
+  function dfs(node) {
+    if (map.has(node)) return map.get(node);
+    const cloneNode = new Node(node.val, []);
+    map.set(node, cloneNode);
+
+    for (let neighbor of node.neighbors) {
+      cloneNode.neighbors.push(dfs(neighbor));
+    }
+    return cloneNode;
+  }
+  return dfs(node);
+};
+
+var cloneGraph = function (node) {
+  if (!node) return null;
+  const map = new Map();
+
+  function dfs(node) {
+    if (map.has(node)) return map.get(node);
+    const cloneNode = new Node(node.val, []);
+    map.set(node, cloneNode);
+
+    for (let neighbor of node.neighbors) {
+      cloneNode.neighbors.push(dfs(neighbor));
+    }
+    return cloneNode;
+  }
+  return dfs(node);
+};
+
+var cloneGraph = function (node) {
+  if (!node) return null;
+  const map = new Map();
+
+  function dfs(node) {
+    if (map.has(node)) return map.get(node);
+    const cloneNode = new Node(node.val, []);
+    map.set(node, cloneNode);
+
+    for (let neighbor of node.neighbors) {
+      cloneNode.neighbors.push(dfs(neighbor));
+    }
+    return cloneNode;
+  }
+  return dfs(node);
+};
+
+var canFinish = function (numCourses, prerequisites) {
+  const graph = new Array(numCourses).fill(0).map(() => []);
+  for (let [course, prereq] of prerequisites) {
+    graph[course].push(prereq);
+  }
+
+  // Array to keep track of visited nodes
+  const visited = new Array(numCourses).fill(false);
+
+  // Array to keep track of nodes in the current recursion stack
+  const recStack = new Array(numCourses).fill(false);
+
+  // DFS function to detect a cycle
+  function dfs(course) {
+    if (recStack[course]) return true; // Cycle detected
+    if (visited[course]) return false; // Already visited
+
+    visited[course] = true;
+    recStack[course] = true;
+
+    for (let prereq of graph[course]) {
+      if (dfs(prereq)) return true;
+    }
+
+    recStack[course] = false;
+    return false;
+  }
+
+  // Check for cycles in all courses
+  for (let i = 0; i < numCourses; i++) {
+    if (dfs(i)) return false;
+  }
+
+  return true;
+};
+var insert = function (intervals, newInterval) {
+  let result = [];
+  let i = 0;
+
+  while (i < intervals.length && intervals[i][1] < newInterval[0]) {
+    result.push(intervals[i]);
+    i++;
+  }
+  while (i < intervals.length && intervals[i][0] <= newInterval[1]) {
+    newInterval[0] = Math.min(intervals[i][0], newInterval[0]);
+    newInterval[1] = Math.max(intervals[i][1], newInterval[1]);
+    i++;
+  }
+  result.push(newInterval);
+
+  while (i < intervals.length) {
+    result.push(intervals[i]);
+    i++;
+  }
+  return result;
+};
+
+var insert = function (intervals, newInterval) {
+  const result = [];
+  let index = 0;
+
+  while (index < intervals.length && intervals[i][1] < newInterval[0]) {
+    result.push(intervals[i]);
+    i++;
+  }
+  while (index < intervals.length && intervals[i][0] <= newInterval[1]) {
+    newInterval[0] = Math.min(intervals[i][0], newInterval[0]);
+    newInterval[1] = Math.max(interval[i][1], newInterval[1]);
+    i++;
+  }
+  result.push(newInterval);
+  while (index < intervals.length) {
+    result.push(intervals[i]);
+    i++;
+  }
+  return result;
+};
+
+var insert = function (intervals, newInterval) {
+  const result = [];
+  let index = 0;
+
+  while (index < intervals.length && intervals[index][1] < newInterval[0]) {
+    result.push(intervals[index]);
+    index++;
+  }
+  while (index < intervals.length && intervals[index][0] <= newInterval[1]) {
+    newInterval[0] = Math.min(intervals[index][0], newInterval[0]);
+    newInterval[1] = Math.max(intervals[index][1], newInterval[1]);
+    index++;
+  }
+  result.push(newInterval);
+  while (index < intervals.length) {
+    result.push(intervals[index]);
+    index++;
+  }
+  return result;
+};
+
+var merge = function (intervals) {
+  if (intervals.length === 1) return intervals;
+  const result = [];
+  intervals.sort((a, b) => a[0] - b[0]);
+
+  for (let iterval of intervals) {
+    if (result.length === 0 || result[result.length - 1][1] < intervals[0])
+      result.push(interval);
+    else
+      result[result.length - 1][1] = Math.max(
+        result[result.length - 1][1],
+        interval[1]
+      );
+  }
+  return result;
+};
+
+var merge = function (intervals) {
+  if (intervals.length === 1) return intervals;
+  const result = [];
+  intervals.sort((a, b) => a[0] - b[0]);
+  for (let interval of intervals) {
+    if (result.length === 0 || result[result.length - 1][1] < intervals[0])
+      result.push(interval);
+    else
+      result[result.length - 1][1] = Math.max(
+        result[result.length - 1][1],
+        interval[1]
+      );
+  }
+  return result;
+};
+
+var eraseOverlapIntervals = function (intervals) {
+  intervals.sort((a, b) => a[1] - b[1]);
+  let end = intervals[0][1];
+  let count = 0;
+
+  for (let i = 1; i < intervals.length; i++) {
+    if (intervals[i][0] < end) count++;
+    else end = intervals[i][1];
+  }
+  return count;
+};
+
+var eraseOverlapIntervals = function (intervals) {
+  intervals.sort((a, b) => a[1] - b[1]);
+  let end = intervals[0][1];
+  let count = 0;
+
+  for (let i = 1; i < intervals.length; i++) {
+    if (intervals[i][0] < end) count++;
+    else end = intervals[i][1];
+  }
+  return count;
+};
+
+var minMeetingRooms = function (intervals) {
+  if (!intervals.length) return 0;
+  let room = 0;
+  intervals.sort((a, b) => a[0] - b[0]);
+  const heap = [];
+  for (let interval of intervals) {
+    heap = heap.filter((end) => end > interval[0]);
+
+    heap.push(intervals[1]);
+    heap.sort((a, b) => a - b);
+
+    room = Math.max(room, heap.length);
+  }
+  return room;
+};
+
+var minMeetingRooms = function (intervals) {
+  if (!intervals.length) return 0;
+  let room = 0;
+  let result = [];
+  intervals.sort((a, b) => a[0] - b[0]);
+
+  for (let interval of intervals) {
+    result = reuslt.filter((end) => end > interval[0]);
+
+    result.push(interval[1]);
+    result.sort((a, b) => a - b);
+
+    room = Math.max(room, result.length);
+  }
+  return room;
+};
+
+var minMeetingRooms = function (intervals) {
+  if (!intervals.length) return 0;
+  intervals.sort((a, b) => a[0] - b[0]);
+  let room = 0;
+  let result = [];
+
+  for (let interval of intervals) {
+    result = result.filter((end) => end > interval[0]);
+
+    result.push(interval[1]);
+    result.sort((a, b) => a - b);
+
+    room = Math.max(room, result.length);
+  }
+  return room;
+};
+
+var reverseList = function (head) {
+  let prev = null;
+  let next = null;
+
+  while (head) {
+    next = head.next;
+    head.next = prev;
+    prev = head;
+    head = next;
+  }
+  return prev;
+};
+
+var reverseList = function (head) {
+  if (!head || !head.next) return head;
+  let newHead = reverseList(head.next);
+
+  head.next.next = head;
+  head.next = null;
+  return newHead;
+};
+
+var hasCycle = function (head) {
+  if (!head || !head.next) return false;
+  let fast = head.next.next;
+  let slow = head.next;
+
+  while (slow !== fast) {
+    if (!fast || !fast.next) return false;
+    fast = fast.next.next;
+    slow = slow.next;
+  }
+  return true;
+};
+
+var removeNthFromEnd = function (head, n) {
+  let dummy = new ListNode();
+  dummy.next = head;
+  let fast = dummy;
+  let slow = dummy;
+
+  for (let i = 0; i <= n; i++) {
+    fast = fast.next;
+  }
+  while (fast !== null) {
+    fast = fast.next;
+    slow = slow.next;
+  }
+  slow.next = slow.next.next;
+  return dummy.next;
+};
+
+var removeNthFromEnd = function (head, n) {
+  let dummy = new ListNode();
+  dummy.next = head;
+  let fast = dummy;
+  let slow = dummy;
+
+  for (let i = 0; i <= n; i++) {
+    fast = fast.next;
+  }
+  while (fast !== null) {
+    fast = fast.next;
+    slow = slow.next;
+  }
+  slow.next = slow.next.next;
+  return dummy.next;
+};
+
+var reorderList = function (head) {
+  if (!head || !head.next) return;
+
+  let fast = head;
+  let slow = head;
+
+  while (fast && fast.next) {
+    fast = fast.next.next;
+    slow = slow.next;
+  }
+
+  let prev = null;
+  let curr = slow;
+  let temp;
+
+  while (curr) {
+    temp = curr.next;
+    curr.next = prev;
+    prev = curr;
+    curr = temp;
+  }
+
+  let first = head;
+  let second = prev;
+
+  while (second.next) {
+    temp = first.next;
+    first.next = second;
+    first = temp;
+
+    temp = second.next;
+    second.next = first;
+    second = temp;
+  }
+};
+
+var setZeroes = function (matrix) {
+  let firstRow = false;
+  let firstCol = false;
+
+  for (let i = 0; i < matrix.length; i++) {
+    if (matrix[i][0] === 0) {
+      firstCol = true;
+      break;
+    }
+  }
+  for (let j = 0; j < matrix[0].length; j++) {
+    if (matrix[0][j] === 0) {
+      firstRow = true;
+      break;
+    }
+  }
+  for (let i = 1; i < matrix.length; i++) {
+    for (let j = 1; j < matrix[0].length; j++) {
+      if (matrix[i][j] === 0) {
+        matrix[i][0] = 0;
+        matrix[0][j] = 0;
+      }
+    }
+  }
+  for (let i = 1; i < matrix.length; i++) {
+    for (let j = 1; j < matrix[0].length; j++) {
+      if (matrix[i][0] === 0 || matrix[0][j] === 0) matrix[i][j] = 0;
+    }
+  }
+  if (firstCol) {
+    for (let i = 0; i < matrix.length; i++) {
+      matrix[i][0] = 0;
+    }
+  }
+  if (firstRow) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      matrix[0][j] = 0;
+    }
+  }
+};
+
+var rotate = function (matrix) {
+  const n = matrix.length;
+
+  // Transpose the matrix
+  for (let i = 0; i < n; i++) {
+    for (let j = i; j < n; j++) {
+      [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]];
+    }
+  }
+
+  // Reverse each row
+  for (let i = 0; i < n; i++) {
+    matrix[i].reverse();
+  }
+};
