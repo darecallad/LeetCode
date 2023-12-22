@@ -1145,3 +1145,366 @@ function deserialize(data) {
   }
   return buiildTree();
 }
+
+var isSubtree = function (root, subRoot) {
+  if (!subRoot) return true;
+  if (!root) return false;
+
+  if (isSameTree(root, subRoot)) return true;
+
+  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+};
+
+function isSameTree(p, q) {
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+  if (p.val !== q.val) return false;
+
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+}
+
+var isSubtree = function (root, subRoot) {
+  if (!subRoot) return true;
+  if (!root) return false;
+
+  if (isSameTree(root, subRoot)) return true;
+  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+};
+
+function isSameTree(p, q) {
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+  if (p.val !== q.val) return false;
+
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+}
+var isSubtree = function (root, subRoot) {
+  if (!subRoot) return true;
+  if (!root) return false;
+
+  if (isSameTree(root, subRoot)) return true;
+  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+};
+
+function isSameTree(p, q) {
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+  if (p.val !== q.val) return false;
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+}
+var isSubtree = function (root, subRoot) {
+  if (!subRoot) return true;
+  if (!root) return false;
+  if (isSameTree(root, subRoot)) return true;
+  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+};
+
+function isSameTree(p, q) {
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+  if (p.val !== q.val) return false;
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+}
+
+var isSubtree = function (root, subRoot) {
+  if (!subRoot) return true;
+  if (!root) return false;
+  if (isSameTree(root, subRoot)) return true;
+  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+};
+
+function isSameTree(p, q) {
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+  if (p.val !== q.val) return false;
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+}
+var isSubtree = function (root, subRoot) {
+  if (!subRoot) return true;
+  if (!root) return false;
+  if (isSameTree(root, subRoot)) return true;
+  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+};
+
+function isSameTree(p, q) {
+  if (!p && !q) return true;
+  if (!p || !q) return false;
+  if (p.val !== q.val) return false;
+  return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+}
+
+var buildTree = function (preorder, inorder) {
+  if (!preorder || !inorder) return null;
+  let rootVal = preorder[0];
+  let root = new TreeNode(rootVal);
+  let mid = inorder.indexOf(rootVal);
+  root.left = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));
+  root.right = buildTree(preorder.slice(mid + 1), inorder.slice(mid + 1));
+
+  return root;
+};
+var buildTree = function (preorder, inorder) {
+  if (!preorder || !inorder) return null;
+  let rootVal = preorder[0];
+  let root = new TreeNode(rootVal);
+  let mid = inorder.indexOf(rootVal);
+
+  root.left = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));
+  root.right = buildTree(preorder.slice(mid + 1), inorder.slice(mid + 1));
+  return root;
+};
+var buildTree = function (preorder, inorder) {
+  if (!preorder.length || !inorder.length) return null;
+  let rootVal = preorder[0];
+  let root = new TreeNode(rootVal);
+  let mid = inorder.indexOf(rootVal);
+
+  root.left = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));
+  root.right = buildTree(preorder.slice(mid + 1), inorder.slice(mid + 1));
+  return root;
+};
+var buildTree = function (preorder, inorder) {
+  if (!preorder.length || !inorder.length) return null;
+  let rootVal = preorder[0];
+  let root = new TreeNode(rootVal);
+  let mid = inorder.indexOf(rootVal);
+  root.left = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));
+  root.right = buildTree(preorder.slice(mid + 1), inorder.slice(mid + 1));
+  return root;
+};
+var buildTree = function (preorder, inorder) {
+  if (!preorder.length || !inorder.length) return null;
+  let rootVal = preorder[0];
+  let root = new TreeNode(rootVal);
+  let mid = inorder.indexOf(rootVal);
+  root.left = buildTree(preorder.slice(1, mid + 1), inorder.slice(0, mid));
+  root.right = buildTree(preorder.slice(mid + 1), inorder.slice(mid + 1));
+  return root;
+};
+
+var isValidBST = function (root) {
+  return validate(root, null, null);
+};
+function validate(node, low, high) {
+  if (!node) return true;
+  if ((low && node.val <= low) || (high && node.val >= high)) return false;
+  return (
+    validate(node.left, low, node.val) && validate(node.right, node.val, high)
+  );
+}
+var isValidBST = function (root) {
+  return validate(root, null, null);
+};
+
+function validate(node, low, high) {
+  if (!node) return true;
+  if ((low && node.val <= low) || (high && node.val >= high)) return false;
+  return (
+    validate(node.left, low, node.val) && validate(node.right, node.val, high)
+  );
+}
+
+var isValidBST = function (root) {
+  return validate(root, null, null);
+};
+function validate(node, low, high) {
+  if (node === null) return true;
+  if ((low !== null && node.val <= low) || (high !== null && node.val >= high))
+    return false;
+  return (
+    validate(node.left, low, node.val) && validate(node.right, node.val, high)
+  );
+}
+var isValidBST = function (root) {
+  return validate(root, null, null);
+};
+
+function validate(node, low, high) {
+  if (node === null) return true;
+  if ((low !== null && node.val <= low) || (high !== null && node.val >= high))
+    return false;
+  return (
+    validate(node.left, low, node.val) && validate(node.right, node.val, high)
+  );
+}
+var isValidBST = function (root) {
+  return validate(root, null, null);
+};
+
+function validate(node, low, high) {
+  if (node === null) return true;
+  if ((row !== null && node.val <= low) || (high !== null && node.val >= high))
+    return false;
+  return (
+    validate(node.left, low, node.val) && validate(node.right, node.val, high)
+  );
+}
+
+var kthSmallest = function (root, k) {
+  let stack = [];
+  let node = root;
+  let count = 0;
+
+  // in-order
+  while (true) {
+    while (node) {
+      stack.push(node);
+      node = node.left;
+    }
+    node = stack.pop();
+    count++;
+
+    if (count === k) return node.val;
+    node = node.right;
+  }
+};
+var kthSmallest = function (root, k) {
+  let stack = [];
+  let node = root;
+  let count = 0;
+
+  while (true) {
+    while (node) {
+      stack.push(node);
+      node = node.left;
+    }
+    node = stack.pop();
+    count++;
+    if (count === k) return node.val;
+    node = node.right;
+  }
+};
+var kthSmallest = function (root, k) {
+  const stack = [];
+  let node = root;
+  let count = 0;
+
+  while (true) {
+    while (node) {
+      stack.push(node);
+      node = node.left;
+    }
+
+    node = stack.pop();
+    count++;
+
+    if (count === k) return node.val;
+    node = node.right;
+  }
+};
+var kthSmallest = function (root, k) {
+  const stack = [];
+  let count = 0;
+  let node = root;
+
+  while (true) {
+    while (node) {
+      stack.push(node);
+      node = node.left;
+    }
+    node = stack.pop();
+    count++;
+
+    if (count === k) return node.val;
+    node = node.right;
+  }
+};
+var kthSmallest = function (root, k) {
+  const stack = [];
+  let node = root;
+  let count = 0;
+
+  while (true) {
+    while (node) {
+      stack.push(node);
+      node = node.left;
+    }
+
+    node = stack.pop();
+    count++;
+
+    if (count === k) return node.val;
+    node = node.right;
+  }
+};
+
+var lowestCommonAncestor = function (root, p, q) {
+  let currentNode = root;
+  while (currentNode) {
+    if (p.val > currentNode.val && q.val > currentNode.val)
+      currentNode = currentNode.right;
+    else if (p.val < currentNode.val && q.val < currentNode.val)
+      currentNode = currentNode.left;
+    else return currentNode;
+  }
+  return null;
+};
+var lowestCommonAncestor = function (root, p, q) {
+  let currentNode = root;
+  while (currentNode) {
+    if (p.val > currentNode.val && q.val > currentNode.val)
+      currentNode = currentNode.right;
+    else if (p.val < currentNode.val && q.val < currentNode.val)
+      currentNode = currentNode.left;
+    else return currentNode;
+  }
+  return null;
+};
+var lowestCommonAncestor = function (root, p, q) {
+  let currentNode = root;
+  while (currentNode) {
+    if (p.val > currentNode.val && q.val > currentNode.val)
+      currentNode = currentNode.right;
+    else if (p.val < currentNode.val && q.val < currentNode.val)
+      currentNode = currentNode.left;
+    else return currentNode;
+  }
+  return null;
+};
+var lowestCommonAncestor = function (root, p, q) {
+  let node = root;
+  while (node) {
+    if (p.val > node.val && q.val > node.val) node = node.right;
+    else if (p.val < node.val && q.val < node.val) node = node.left;
+    else return node;
+  }
+  return null;
+};
+var lowestCommonAncestor = function (root, p, q) {
+  let node = root;
+  while (node) {
+    if (p.val > node.val && q.val > node.val) node = node.right;
+    else if (p.val < node.val && q.val < node.val) node = node.left;
+    else return node;
+  }
+  return null;
+};
+
+var Trie = function () {
+  this.root = new TrieNode();
+};
+Trie.prototype.insert = function (word) {
+  let current = this.root;
+  for (const char of word) {
+    if (!current.children[char]) current.children[char] = new TrieNode();
+    current = current.children[char];
+  }
+  current.isEndOfWord = true;
+};
+Trie.prototype.search = function (word) {
+  let current = this.root;
+  for (const char of word) {
+    if (!current.children[char]) return false;
+    current = current.children[char];
+  }
+  return current.isEndOfWord;
+};
+Trie.prototype.startsWith = function (prefix) {
+  let current = this.root;
+  for (const char of prefix) {
+    if (!current.children[char]) return false;
+    current = current.children[char];
+  }
+  return true;
+};
+//
