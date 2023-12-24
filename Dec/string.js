@@ -1508,3 +1508,235 @@ Trie.prototype.startsWith = function (prefix) {
   return true;
 };
 //
+//two sum
+
+var twoSum = function (nums, target) {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const res = target - nums[i];
+    if (map.has(res)) return [map.get(res), i];
+    else map.set(nums[i], i);
+  }
+};
+
+var twoSum = function (nums, target) {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const res = target - nums[i];
+    if (map.has(res)) return [map.get(res), i];
+    else map.set(nums[i], i);
+  }
+};
+
+var twoSum = function (nums, target) {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const res = target - nums[i];
+    if (map.has(res)) return [map.get(res), i];
+    else map.set(nums[i], i);
+  }
+};
+
+var twoSum = function (nums, target) {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const res = target - nums[i];
+    if (map.has(res)) return [map.get(res), i];
+    else map.set(nums[i], i);
+  }
+};
+var twoSum = function (nums, target) {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    const res = target - nums[i];
+    if (map.has(res)) return [map.get(res), i];
+    else map.set(nums[i], i);
+  }
+};
+var twoSum = function (nums, target) {
+  const map = new Map(); // using map to set key value pair
+  for (let i = 0; i < nums.length; i++) {
+    // go though the whole nums array
+    const res = target - nums[i]; // res that we want to find for element
+    if (map.has(res)) return [map.get(res), i];
+    // if we find it return the index with current index;
+    else map.set(nums[i], i); // else set the current value with current index;
+  }
+};
+
+var maxProfit = function (prices) {
+  let buyTime = prices[0];
+  let profit = 0;
+
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buyTime) buyTime = prices[i];
+    profit = Math.max(profit, prices[i] - buyTime);
+  }
+  return profit;
+};
+var maxProfit = function (prices) {
+  let buyTime = prices[0];
+  let profit = 0;
+
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buyTime) buyTime = prices[i];
+    profit = Math.max(profit, prices[i] - buyTime);
+  }
+  return profit;
+};
+var maxProfit = function (prices) {
+  let buyTime = prices[0];
+  let profit = 0;
+
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buyTime) buyTime = prices[i];
+    profit = Math.max(profit, prices[i] - buyTime);
+  }
+  return profit;
+};
+var maxProfit = function (prices) {
+  let buyTime = prices[0];
+  let profit = 0;
+
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buyTime) buyTime = prices[i];
+    profit = Math.max(profit, prices[i] - buyTime);
+  }
+  return profit;
+};
+var maxProfit = function (prices) {
+  let buyTime = prices[0];
+  let profit = 0;
+
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buyTime) buyTime = prices[i];
+    profit = Math.max(profit, prices[i] - buyTime);
+  }
+  return profit;
+};
+var maxProfit = function (prices) {
+  let buyTime = prices[0];
+  let profit = 0;
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buyTime) buyTime = prices[i];
+    profit = Math.max(profit, prices[i] - buyTime);
+  }
+  return profit;
+};
+var maxProfit = function (prices) {
+  let buyTime = prices[0];
+  let profit = 0;
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buyTime) buyTime = prices[i];
+    profit = Math.max(profit, prices[i] - buyTime);
+  }
+  return profit;
+};
+var maxProfit = function (prices) {
+  let buyTime = prices[0];
+  let profit = 0;
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buyTime) buyTime = prices[i];
+    profit = Math.max(profit, prices[i] - buyTime);
+  }
+  return profit;
+};
+var maxProfit = function (prices) {
+  let buyTime = prices[0];
+  let profit = 0;
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buyTime) buyTime = prices[i];
+    profit = Math.max(profit, prices[i] - buyTime);
+  }
+  return profit;
+};
+var maxProfit = function (prices) {
+  let buyTime = prices[0];
+  let profit = 0;
+  for (let i = 1; i < prices.length; i++) {
+    if (prices[i] < buyTime) buyTime = prices[i];
+    profit = Math.max(profit, prices[i] - buyTime);
+  }
+  return profit;
+};
+
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (let item of nums) {
+    if (set.has(item)) return true;
+    else set.add(item);
+  }
+  return false;
+};
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (let item of nums) {
+    if (set.has(item)) return true;
+    else set.add(item);
+  }
+  return false;
+};
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (let item of nums) {
+    if (set.has(item)) return true;
+    else set.add(item);
+  }
+  return false;
+};
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (let item of nums) {
+    if (set.has(item)) return true;
+    else set.add(item);
+  }
+  return false;
+};
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (let item of nums) {
+    if (set.has(item)) return true;
+    else set.add(item);
+  }
+  return false;
+};
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (let item of nums) {
+    if (set.has(item)) return true;
+    else set.add(item);
+  }
+  return false;
+};
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (let item of nums) {
+    if (set.has(item)) return true;
+    else set.add(item);
+  }
+  return false;
+};
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (let item of nums) {
+    if (set.has(item)) return true;
+    else set.add(item);
+  }
+  return false;
+};
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (let item of nums) {
+    if (set.has(item)) return true;
+    else set.add(item);
+  }
+  return false;
+};
+var containsDuplicate = function (nums) {
+  const set = new Set();
+  for (let item of nums) {
+    if (set.has(item)) return true;
+    else set.add(item);
+  }
+  return false;
+};
