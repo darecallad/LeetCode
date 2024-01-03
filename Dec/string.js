@@ -1740,3 +1740,369 @@ var containsDuplicate = function (nums) {
   }
   return false;
 };
+
+var productExceptSelf = function (nums) {
+  let output = new Array(nums.length).fill(1);
+  let left = 1;
+  for (let i = 1; i < nums.length; i++) {
+    left = left * nums[i - 1];
+    output[i] = output[i] * left;
+  }
+  let right = 1;
+  for (let i = nums.length - 2; i >= 0; i--) {
+    right = right * nums[i + 1];
+    output[i] *= right;
+  }
+  return output;
+};
+var productExceptSelf = function (nums) {
+  let dp = new Array(nums.length).fill(1);
+  let left = 1;
+  for (let i = 1; i < nums.length; i++) {
+    left *= nums[i - 1];
+    dp[i] *= left;
+  }
+  let right = 1;
+  for (let i = nums.length - 2; i >= 0; i--) {
+    right *= nums[i + 1];
+    dp[i] *= right;
+  }
+  return dp;
+};
+var productExceptSelf = function (nums) {
+  let dp = new Array(nums.length).fill(1);
+  let left = 1;
+  for (let i = 1; i < nums.length; i++) {
+    left *= nums[i - 1];
+    dp[i] *= left;
+  }
+  let right = 1;
+  for (let i = nums.length - 2; i >= 0; i--) {
+    right *= nums[i + 1];
+    dp[i] *= right;
+  }
+  return dp;
+};
+var productExceptSelf = function (nums) {
+  let dp = new Array(nums.length).fill(1);
+  let left = 1;
+  let right = 1;
+  for (let i = 1; i < nums.length; i++) {
+    left *= nums[i - 1];
+    dp[i] *= left;
+  }
+  for (let i = nums.length - 2; i >= 0; i--) {
+    right *= nums[i + 1];
+    dp[i] *= right;
+  }
+  return dp;
+};
+var productExceptSelf = function (nums) {
+  let dp = new Array(nums.length).fill(1);
+  let left = 1;
+  let right = 1;
+  for (let i = 1; i < nums.length; i++) {
+    left *= nums[i - 1];
+    dp[i] *= left;
+  }
+  for (let i = nums.length - 2; i >= 0; i--) {
+    right *= nums[i + 1];
+    dp[i] *= right;
+  }
+  return dp;
+};
+var productExceptSelf = function (nums) {
+  let dp = new Array(nums.length).fill(1);
+  let left = 1;
+  let right = 1;
+  for (let i = 1; i < nums.length; i++) {
+    left *= nums[i - 1];
+    dp[i] *= left;
+  }
+  for (let i = nums.length - 2; i >= 0; i--) {
+    right *= nums[i + 1];
+    dp[i] *= right;
+  }
+  return dp;
+};
+var productExceptSelf = function (nums) {
+  let dp = new Array(nums.length).fill(1);
+  let left = 1;
+  let right = 1;
+
+  for (let i = 1; i < nums.length; i++) {
+    left *= nums[i - 1];
+    dp[i] *= left;
+  }
+  for (let i = nums.length - 2; i >= 0; i--) {
+    right *= nums[i + 1];
+    dp[i] *= right;
+  }
+  return dp;
+};
+var productExceptSelf = function (nums) {
+  let dp = new Array(nums.length).fill(1);
+  let left = 1;
+  let right = 1;
+  for (let i = 1; i < nums.length; i++) {
+    left *= nums[i - 1];
+    dp[i] *= left;
+  }
+  for (let i = nums.length - 2; i >= 0; i--) {
+    right *= nums[i + 1];
+    dp[i] *= right;
+  }
+  return dp;
+};
+var productExceptSelf = function (nums) {
+  let dp = new Array(nums.length).fill(1);
+  let left = 1;
+  let right = 1;
+  for (let i = 1; i < nums.length; i++) {
+    left *= nums[i - 1];
+    dp[i] *= left;
+  }
+  for (let i = nums.length - 2; i >= 0; i--) {
+    right *= nums[i + 1];
+    dp[i] *= right;
+  }
+  return dp;
+};
+var productExceptSelf = function (nums) {
+  let dp = new Array(nums.length).fill(1);
+  let left = 1;
+  let right = 1;
+  for (let i = 1; i < nums.length; i++) {
+    left *= nums[i - 1];
+    dp[i] *= left;
+  }
+  for (let i = nums.length - 2; i >= 0; i--) {
+    right *= nums[i + 1];
+    dp[i] *= right;
+  }
+  return dp;
+};
+
+var maxSubArray = function (nums) {
+  if (!nums.length) return 0;
+  let currentMax = nums[0];
+  let gobalMax = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    currentMax = Math.max(nums[i], nums[i] + currentMax);
+    gobalMax = Math.max(currentMax, gobalMax);
+  }
+  return gobalMax;
+};
+var maxSubArray = function (nums) {
+  if (!nums.length) return 0;
+  let cur = nums[0];
+  let max = nums[0];
+
+  for (let i = 1; i < nums.length; i++) {
+    cur = Math.max(nums[i], cur + nums[i]);
+    max = Math.max(cur, max);
+  }
+  return max;
+};
+var maxSubArray = function (nums) {
+  if (!nums.length) return 0;
+  let cur = nums[0];
+  let max = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    cur = Math.max(nums[i], nums[i] + cur);
+    max = Math.max(cur, max);
+  }
+  return max;
+};
+var maxSubArray = function (nums) {
+  if (!nums.length) return 0;
+  let cur = nums[0];
+  let max = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    cur = Math.max(nums[i], nums[i] + cur);
+    max = Math.max(cur, max);
+  }
+  return max;
+};
+var maxSubArray = function (nums) {
+  if (!nums.length) return 0;
+  let cur = nums[0];
+  let max = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    cur = Math.max(nums[i], cur + nums[i]);
+    max = Math.max(cur, max);
+  }
+  return max;
+};
+var maxSubArray = function (nums) {
+  if (!nums.length) return 0;
+  let cur = nums[0];
+  let max = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    cur = Math.max(nums[i], nums[i] + cur);
+    max = Math.max(cur, max);
+  }
+  return max;
+};
+var maxSubArray = function (nums) {
+  if (!nums.length) return 0;
+  let cur = nums[0];
+  let max = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    cur = Math.max(nums[i], nums[i] + cur);
+    max = Math.max(cur, max);
+  }
+  return max;
+};
+var maxSubArray = function (nums) {
+  if (!nums.length) return 0;
+  let cur = nums[0];
+  let max = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    cur = Math.max(nums[i], nums[i] + cur);
+    max = Math.max(cur, max);
+  }
+  return max;
+};
+var maxSubArray = function (nums) {
+  if (!nums.length) return 0;
+  let cur = nums[0];
+  let max = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    cur = Math.max(nums[i], nums[i] + cur);
+    max = Math.max(cur, max);
+  }
+  return max;
+};
+
+var maxProduct = function (nums) {
+  if (!nums.length) return 0;
+  let min = nums[0];
+  let max = nums[0];
+  let res = max;
+
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) [max, min] = [min, max];
+    max = Math.max(nums[i], nums[i] * max);
+    min = Math.min(nums[i], nums[i] * min);
+    res = Math.max(max, res);
+  }
+  return res;
+};
+var maxProduct = function (nums) {
+  if (!nums.length) return 0;
+  let min = nums[0];
+  let max = nums[0];
+  let res = max;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) [max, min] = [min, max];
+    max = Math.max(nums[i], max * nums[i]);
+    min = Math.min(nums[i], nums[i] * min);
+    res = Math.max(res, max);
+  }
+  return res;
+};
+var maxProduct = function (nums) {
+  if (!nums.length) return 0;
+  let min = nums[0];
+  let max = nums[0];
+  let res = max;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) [max, min] = [min, max];
+    max = Math.max(nums[i], nums[i] * max);
+    min = Math.min(nums[i], nums[i] * min);
+    res = Math.max(res, max);
+  }
+  return res;
+};
+var maxProduct = function (nums) {
+  if (!nums.length) return 0;
+  let max = nums[0];
+  let min = nums[0];
+  let res = max;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) [max, min] = [min, max];
+    max = Math.max(nums[i], nums[i] * max);
+    min = Math.min(nums[i], nums[i] * min);
+    res = Math.max(res, max);
+  }
+  return res;
+};
+var maxProduct = function (nums) {
+  if (!nums.length) return 0;
+  let min = nums[0];
+  let max = nums[0];
+  let res = max;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) [max, min] = [min, max];
+    max = Math.max(nums[i], nums[i] * max);
+    min = Math.min(nums[i], nums[i] * min);
+    res = Math.max(res, max);
+  }
+  return res;
+};
+var maxProduct = function (nums) {
+  if (!nums.length) return 0;
+  let min = nums[0];
+  let max = nums[0];
+  let res = max;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) [max, min] = [min, max];
+    max = Math.max(nums[i], nums[i] * max);
+    min = Math.min(nums[i], nums[i] * min);
+    res = Math.max(res, max);
+  }
+  return res;
+};
+var maxProduct = function (nums) {
+  if (!nums.length) return 0;
+  let min = nums[0];
+  let max = nums[0];
+  let res = max;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) [max, min] = [min, max];
+    max = Math.max(nums[i], nums[i] * max);
+    min = Math.min(nums[i], nums[i] * min);
+    res = Math.max(res, max);
+  }
+  return res;
+};
+var maxProduct = function (nums) {
+  if (!nums.length) return 0;
+  let max = nums[0];
+  let min = nums[0];
+  let res = max;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) [max, min] = [min, max];
+    max = Math.max(nums[i], nums[i] * max);
+    min = Math.min(nums[i], nums[i] * min);
+    res = Math.max(res, max);
+  }
+  return res;
+};
+var maxProduct = function (nums) {
+  if (!nums.length) return 0;
+  let min = nums[0];
+  let max = nums[0];
+  let res = max;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) [max, min] = [min, max];
+    max = Math.max(nums[i], nums[i] * max);
+    min = Math.min(nums[i], nums[i] * min);
+    res = Math.max(res, max);
+  }
+  return res;
+};
+var maxProduct = function (nums) {
+  if (!nums.length) return 0;
+  let min = nums[0];
+  let max = nums[0];
+  let res = max;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] < 0) [max, min] = [min, max];
+    max = Math.max(nums[i], nums[i] * max);
+    min = Math.min(nums[i], nums[i] * min);
+    res = Math.max(res, max);
+  }
+  return res;
+};
