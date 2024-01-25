@@ -319,3 +319,221 @@ function shuffler(arr) {
   }
   return arr;
 }
+
+function shuffler(arr) {
+  let n = arr.length;
+
+  for (let i = n - 1; i > 0; i--) {
+    const randIdx = Math.floor(Math.random() * (i + 1));
+    const storedItem = arr[i];
+    arr[i] = arr[randIdx];
+    arr[randIdx] = storedItem;
+  }
+  return arr;
+}
+
+function decode(message) {
+  if (!message.length || !message[0].length) return "";
+  let isTop = true;
+  let row = 0;
+  let col = 0;
+  let m = message.length;
+  let n = message[0].length;
+  let res = "";
+  while (col < n) {
+    if (isTop) {
+      res += message[row++][col++];
+    } else res += message[row--][col++];
+
+    if (row === m - 1) isTop = false;
+    if (row === 0) isTop = true;
+  }
+  return res;
+}
+
+function firstBadVersion(isBad) {
+  return (version) => {
+    let left = 0;
+    let right = version;
+
+    while (left <= right) {
+      const mid = Math.floor((right - left) / 2) + left;
+      if (isBad(mid)) right = mid - 1;
+      else left = mid + 1;
+    }
+    return left <= version ? left : -1;
+  };
+}
+
+function firstBadVersion(isBad) {
+  return (version) => {
+    let start = 0;
+    let end = version;
+
+    while (start <= end) {
+      const mid = Math.floor((end - start) / 2) + start;
+      if (isBad(mid)) end = mid - 1;
+      else start = mid + 1;
+    }
+    return start <= version ? start : -1;
+  };
+}
+
+function isBadVersion(isBad) {
+  return (version) => {
+    let start = 0;
+    let end = version;
+    while (start <= end) {
+      const mid = Math.floor((end - start) / 2) + start;
+      if (isBad(mid)) end = mid - 1;
+      else start = mid + 1;
+    }
+    return start <= version ? start : -1;
+  };
+}
+
+function firstBadVersion(isBad) {
+  return (version) => {
+    let start = 0;
+    let end = version;
+
+    while (start <= end) {
+      const mid = Math.floor((end - start) / 2) + start;
+      if (isBad(mid)) end = mid - 1;
+      else start = mid + 1;
+    }
+    return start <= version ? start : -1;
+  };
+}
+
+function pipe(funcs) {
+  return (arg) => {
+    return funcs.reduce((result, func) => {
+      return func.call(this, result);
+    }, arg);
+  };
+}
+
+function pipe(funcs) {
+  return (arg) => {
+    return funcs.reduce((result, func) => {
+      return func.call(this, result);
+    }, arg);
+  };
+}
+
+function pipe(funcs) {
+  return (arg) => {
+    return funcs.reduce((result, func) => {
+      return func.call(this, result);
+    }, arg);
+  };
+}
+
+function pipe(funcs) {
+  return (arg) => {
+    return funcs.reduce((result, func) => {
+      return func.call(this, result);
+    }, arg);
+  };
+}
+
+function update(data, command) {
+  for (const [key, value] of Object.entries(command)) {
+    switch (key) {
+      case "$push":
+        return [...data, ...value];
+      case "$set":
+        return value;
+      case "$merge":
+        if (!(data instanceof Object)) {
+          throw Error("bad merge");
+        }
+        return { ...data, ...value };
+      case `$apple`:
+        return value(data);
+      default:
+        if (data instanceof Array) {
+          const res = [...data];
+          res[key] = update(data(key), value);
+          return res;
+        } else {
+          return { ...data, [key]: update(data[key], value) };
+        }
+    }
+  }
+}
+
+function update(data, command) {
+  for (const [key, value] of Object.entries(command)) {
+    switch (key) {
+      case `$push`:
+        return [...data, ...value];
+      case `$set`:
+        return value;
+      case `$merge`:
+        if (!(data instanceof Object)) throw Error("bad merge");
+        return { ...data, ...value };
+      case `apply`:
+        return value(data);
+      default:
+        if (data instanceof Array) {
+          const res = [...data];
+          res[key] = update(data(key), value);
+          return res;
+        } else {
+          return { ...data, [key]: update(data[key]), value };
+        }
+    }
+  }
+}
+
+function update(data, command) {
+  for (let [key, value] of Object.entries(command)) {
+    switch (key) {
+      case `$push`:
+        return [...data, ...value];
+      case `$set`:
+        return value;
+      case `$merge`:
+        if (!(data instanceof Object)) throw Error("bad merge");
+        return { ...data, ...value };
+      case `$update`:
+        return value(data);
+      default:
+        if (data instanceof Array) {
+          const res = [...data];
+          res[key] = update(data[key]);
+          return res;
+        } else {
+          return { ...data, [key]: update(data[key], value) };
+        }
+    }
+  }
+}
+
+function update(data, command) {
+  for (let [key, value] of Object.entries(command)) {
+    switch (key) {
+      case `$push`:
+        return [...data, ...value];
+      case `$set`:
+        return value;
+      case `merge`:
+        if (!(data instanceof Object)) {
+          throw Error("bad merge");
+        }
+        return { ...data, ...value };
+      case `$apply`:
+        return value(data);
+      default:
+        if (data instanceof Array) {
+          const res = [...data];
+          res[key] = update(data[key], value);
+          return res;
+        } else {
+          return { ...data, [key]: update(data[key], value) };
+        }
+    }
+  }
+}
